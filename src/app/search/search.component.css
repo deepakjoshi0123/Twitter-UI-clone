@@ -1,0 +1,72 @@
+.search-input {
+  width: 100%;
+}
+
+.search-continer {
+  z-index: 1;
+}
+
+.search-results {
+  position: absolute;
+  z-index: 1;
+  margin-top: 0%;
+  max-height: 150px;
+  overflow: scroll;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e1e1e1;
+  transition: background-color 0.3s;
+}
+
+.user-row:hover {
+  background-color: #f9f9f9;
+}
+
+/* Style the user details */
+.user-details {
+  flex: 1;
+}
+
+.profile-icon {
+  font-size: 40px; /* Increase the icon size */
+  margin-right: 15px; /* Add some spacing between the icon and text */
+  height: 40px;
+  width: 40px;
+  color: #657786;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.user-username {
+  font-size: 14px;
+  color: #888;
+}
+
+.follow {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: bac kground-color 0.3s ease;
+}
+
+.search-results {
+  z-index: 1;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 375px;
+}
+::-webkit-scrollbar {
+  width: 0; /* Hide the scrollbar in Chrome and Safari */
+}

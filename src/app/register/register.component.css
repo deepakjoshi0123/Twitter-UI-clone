@@ -1,0 +1,23 @@
+.register-form {
+  padding: 20px;
+}
+
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../assets/background.jpg"); /* Adjust the path */
+  background-size: cover;
+}
+
+.login-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.register-button {
+  height: 50px;
+}

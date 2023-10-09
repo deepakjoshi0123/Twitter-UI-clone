@@ -1,0 +1,15 @@
+<mat-card class="tweet-card">
+  <div class="tweet-header">
+    <mat-icon class="profile-icon">account_circle</mat-icon>
+    <div>
+      <div class="tweet-details">
+        <span class="name">{{ tweet.name }}</span>
+        <span class="username">{{ "@" + tweet.username }}</span>
+        <span class="datetime">{{ getDateTime(tweet) }}</span>
+      </div>
+      <div class="tweet-content">
+        <p>{{ tweet.tweet }}</p>
+      </div>
+    </div>
+  </div>
+</mat-card>

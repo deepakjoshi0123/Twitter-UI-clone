@@ -1,0 +1,42 @@
+<div class="profile-container">
+  <mat-toolbar>
+    <span>{{ getName() }}</span>
+  </mat-toolbar>
+
+  <div class="background-image">
+    <!-- Background image here -->
+  </div>
+
+  <div class="profile-picture-container">
+    <img src="../../assets/prof.jpg" alt="Profile Picture" />
+    <button
+      mat-mini-fab
+      class="edit-button"
+      color="accent"
+      (click)="openEditProfileModal()"
+      title="Edit Profile"
+    >
+      <mat-icon
+        matTooltip="Hover to display information on right."
+        matTooltipPosition="right"
+        >edit</mat-icon
+      >
+    </button>
+  </div>
+
+  <div class="profile-info">
+    <div class="name">{{ getName() }}</div>
+    <div class="username">{{ "@" + username }}</div>
+    <div class="joined-date">
+      <div><mat-icon>date_range</mat-icon></div>
+      <div style="margin-left: 1%">{{ "joined on " + getJoinedDate() }}</div>
+    </div>
+    <div class="follow-links">
+      <a (click)="openFollowingsModal()">Followings</a>
+      <a (click)="openFollowersModal()" style="margin-left: 2%">Followers</a>
+    </div>
+  </div>
+
+  <hr />
+  <app-tweets [tweets]="tweets"></app-tweets>
+</div>

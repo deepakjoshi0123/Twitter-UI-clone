@@ -1,0 +1,24 @@
+<div class="search-container">
+  <mat-form-field class="search-input">
+    <input matInput placeholder="Search Users" [formControl]="searchControl" />
+  </mat-form-field>
+
+  <div *ngIf="searchResults.length > 0" class="search-results">
+    <mat-list class="user-list">
+      <mat-list-item *ngFor="let user of searchResults">
+        <!-- Use flexbox for the row layout -->
+        <div class="user-row">
+          <mat-icon mat-list-icon class="profile-icon">account_circle</mat-icon>
+
+          <div class="user-details">
+            <div class="user-name">{{ user.name }}</div>
+            <div class="user-username">{{ "@" + user.username }}</div>
+          </div>
+          <!-- <button class="follow" (click)="selectUser(user)">
+            {{ getButtonLabel(user) }}
+          </button> -->
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="user-container">
+  <mat-card class="user-card-continer">
+    <mat-card-title class="sticky-title">{{ getModelTitle() }}</mat-card-title>
+    <mat-card-content>
+      <mat-list class="user-list">
+        <mat-list-item *ngFor="let user of users">
+          <!-- Use flexbox for the row layout -->
+          <div class="user-row">
+            <mat-icon mat-list-icon class="profile-icon"
+              >account_circle</mat-icon
+            >
+
+            <div class="user-details">
+              <div class="user-name">{{ user.name }}</div>
+              <div class="user-username">{{ "@" + user.username }}</div>
+            </div>
+            <button class="follow" (click)="selectUser(user)">
+              {{ getButtonLabel(user) }}
+            </button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

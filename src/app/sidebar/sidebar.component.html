@@ -1,0 +1,73 @@
+<mat-sidenav-container style="height: 100%">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened="true"
+    style="width: 12%"
+    class="mat-sidenav-content"
+  >
+    <!-- Use mat-nav-list for the sidebar links with icons -->
+    <div class="profile-picture-container">
+      <img src="../../assets/birdlogo.webp" alt="Profile Picture" />
+    </div>
+
+    <mat-nav-list>
+      <a mat-list-item (click)="showHome()" align="center">
+        <div class="sidebar-item">
+          <div>Timeline</div>
+          <div style="margin-left: 9%">
+            <mat-icon class="sidebar-icon">list</mat-icon>
+          </div>
+        </div>
+      </a>
+
+      <a
+        mat-list-item
+        class="sidebar-item"
+        (click)="showProfile()"
+        align="center"
+      >
+        <div class="sidebar-item">
+          <div>Profile</div>
+          <div style="margin-left: 9%">
+            <mat-icon class="sidebar-icon">person</mat-icon>
+          </div>
+        </div>
+      </a>
+
+      <a mat-list-item class="sidebar-item" (click)="logout()" align="center">
+        <div class="sidebar-item">
+          <div>Logout</div>
+          <div style="margin-left: 9%">
+            <mat-icon class="sidebar-icon">power_settings_new</mat-icon>
+          </div>
+        </div>
+      </a>
+      <!-- Add more list items as needed with icons -->
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div style="display: flex; flex-direction: row">
+      <div style="flex: 5">
+        <div [ngSwitch]="content">
+          <app-home *ngSwitchCase="'home'"></app-home>
+          <app-profile *ngSwitchCase="'profile'"></app-profile>
+        </div>
+      </div>
+
+      <div class="recommendation">
+        <div class="search-bar">
+          <app-search></app-search>
+        </div>
+        <div class="user-list">
+          <app-users-list
+            [users]="users"
+            [context]="'sidebar'"
+            (userSelected)="handleUserSelection($event)"
+          ></app-users-list>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

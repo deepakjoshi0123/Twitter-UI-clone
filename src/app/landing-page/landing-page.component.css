@@ -1,0 +1,29 @@
+.landing-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../assets/background.jpg"); /* Adjust the path */
+  background-size: cover;
+}
+
+.card {
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+mat-card-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  margin-top: 10px;
+}

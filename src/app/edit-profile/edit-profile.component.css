@@ -1,0 +1,19 @@
+.edit-form {
+  padding: 20px;
+  background-color: rgb(230, 229, 234);
+}
+
+.edit-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border-radius: 5px;
+  background-size: cover;
+}
+
+.save-button {
+  height: 50px;
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(84, 185, 224) !important;
+}

@@ -1,0 +1,23 @@
+.login-form {
+  padding: 20px;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../assets/background.jpg"); /* Adjust the path */
+  background-size: cover;
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  height: 50px;
+}

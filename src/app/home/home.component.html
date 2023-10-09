@@ -1,0 +1,29 @@
+<div class="home">
+  <mat-toolbar color="primary">
+    <span>{{ getName() }}</span>
+  </mat-toolbar>
+  <!-- Wrap the entire content in a scrollable container -->
+  <div class="home-scrollable">
+    <mat-card class="tweet-container">
+      <mat-card-content>
+        <mat-form-field class="tweet-input">
+          <textarea
+            matInput
+            placeholder="What's happening ..."
+            [(ngModel)]="newTweetText"
+            (input)="updateTweetButtonDisabledState()"
+          ></textarea>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          class="tweet-button"
+          (click)="addNewTweet()"
+          [disabled]="isTweetButtonDisabled"
+        >
+          Tweet
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <app-tweets [tweets]="tweets"></app-tweets>
+  </div>
+</div>

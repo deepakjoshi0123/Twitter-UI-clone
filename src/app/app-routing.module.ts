@@ -1,10 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AuthGuard } from './authGuard/auth.guard';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: LandingPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'home', canActivate: [AuthGuard], component: HomePageComponent },
+  { path: '**', redirectTo: '/home' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

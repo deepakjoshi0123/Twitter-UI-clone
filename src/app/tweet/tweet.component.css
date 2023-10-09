@@ -1,0 +1,53 @@
+/* Apply Twitter's theme color to the card */
+.tweet-card {
+  margin-top: 5px;
+  cursor: pointer;
+  padding: 8px;
+  background-color: #e3eaef;
+  box-shadow: 0 2px 4px rgba(138, 136, 136, 0.1); /* Add a subtle shadow */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+}
+
+.tweet-card:hover {
+  background-color: #f5f8fa; /* Light blue background on hover */
+}
+
+/* Style the tweet header */
+.tweet-header {
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+.profile-icon {
+  font-size: 50px; /* Increase the icon size */
+  margin-right: 12px; /* Add some spacing between the icon and text */
+  height: 50px;
+  width: 50px;
+  color: #657786;
+}
+
+.tweet-details {
+  margin-right: 10px;
+}
+
+.username,
+.datetime {
+  margin-left: 50px;
+  font-size: 14px;
+  color: #657786;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.name {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 15px;
+  color: #14171a;
+}
+
+.tweet-content {
+  font-size: 14px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}

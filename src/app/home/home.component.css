@@ -1,0 +1,97 @@
+/* Style the tweet input textarea */
+.tweet-input {
+  width: 96%;
+  height: 100px;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Style the tweet button */
+.tweet-button {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.tweet-button:disabled {
+  background-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.tweet-button:hover {
+  background-color: #0e7ee0;
+}
+
+/* Style the tweets container */
+.tweets-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tweet {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.tweet-author {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* Hide the scrollbar in the tweets container */
+.tweets-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tweets-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tweets-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 3px;
+}
+
+.tweets-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Style the home toolbar */
+.mat-toolbar {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+/* Style the links in the toolbar */
+.mat-toolbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.mat-toolbar a:hover {
+  color: #0e7ee0;
+}
+
+.home {
+  max-width: 660px;
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Hide the scrollbar in Chrome and Safari */
+}
