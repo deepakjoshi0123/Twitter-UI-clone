@@ -11,6 +11,9 @@
       <mat-form-field fxFlex="100%">
         <mat-label>User Name</mat-label>
         <input matInput placeholder="username" formControlName="username" />
+        <mat-error *ngIf="editForm.get('username').hasError('noSpaces')"
+          >Invalid username</mat-error
+        >
       </mat-form-field>
 
       <mat-form-field fxFlex="100%">

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../Services/notification.service';
 import { ModalService } from '../Services/modal.service';
 import { UserService } from '../Services/user.service';
+import { ValidationService } from '../Services/validation.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,10 +16,9 @@ export class EditProfileComponent {
   editForm: FormGroup;
 
   constructor(
-    private router: Router,
     private notificationService: NotificationService,
-    private modalService: ModalService,
     private userService: UserService,
+    private validationService: ValidationService,
     private dialogRef: MatDialogRef<EditProfileComponent>
   ) {
     this.initForm();
@@ -26,7 +26,7 @@ export class EditProfileComponent {
 
   initForm() {
     this.editForm = new FormGroup({
-      username: new FormControl('', []),
+      username: new FormControl('', [this.validationService.noSpacesValidator]),
       DOB: new FormControl('', []),
       bio: new FormControl('', []),
       phone: new FormControl('', [Validators.pattern(/^\d{10}$/)]),

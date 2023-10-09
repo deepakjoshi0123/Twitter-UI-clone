@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../Services/notification.service';
+import { ValidationService } from '../Services/validation.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private validationService: ValidationService
   ) {
     this.initForm();
   }
@@ -23,7 +25,10 @@ export class RegisterComponent {
   initForm() {
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required]),
+      username: new FormControl('', [
+        Validators.required,
+        this.validationService.noSpacesValidator,
+      ]),
       DOB: new FormControl('', []),
       phone: new FormControl('', [
         Validators.required,
