@@ -15,7 +15,7 @@ export class TweetService {
     const options = { headers: headers };
 
     return this.http.get(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `  https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/timeline`,
       options
@@ -29,7 +29,7 @@ export class TweetService {
     let userId = this.cookieService.get('userId');
     console.log('why its null', userId);
     return this.http.get(
-      `http://localhost:8082/api/user/${userId}/tweets`,
+      `  https://twitter-clone-apis.onrender.com/api/user/${userId}/tweets`,
       options
     );
   }
@@ -40,7 +40,7 @@ export class TweetService {
     const options = { headers: headers };
 
     return this.http.post(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `  https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/tweet`,
       tweet,

@@ -53,6 +53,10 @@ export class LoginComponent {
           }
         },
         (error) => {
+          console.log(error);
+          // if (error.status === 100) {
+          //   console.log('alwkd --  > ----');
+          // }
           let errMsg = error.error.errors
             ? error.error.errors[0].msg
             : error.error.message;

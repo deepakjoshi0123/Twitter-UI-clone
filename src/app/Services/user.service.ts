@@ -16,7 +16,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/recommendation`, // replace this with real api
       options
@@ -29,7 +29,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/followers`, // replace this with real api
       options
@@ -42,7 +42,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/followings`, // replace this with real api
       options
@@ -55,7 +55,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.post(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/follow/${userId}`, // replace this with real api
       null,
@@ -69,7 +69,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.delete(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/unfollow/${userId}`,
       options
@@ -82,7 +82,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/followings`, // replace this with real api
       options
@@ -95,7 +95,9 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.put(
-      `http://localhost:8082/api/user/${this.cookieService.get('userId')}`,
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+        'userId'
+      )}`,
       data,
       options
     );
@@ -107,7 +109,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get<any[]>(
-      `http://localhost:8082/api/user/${this.cookieService.get(
+      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
         'userId'
       )}/search/${query}`, // replace this with real api
       options

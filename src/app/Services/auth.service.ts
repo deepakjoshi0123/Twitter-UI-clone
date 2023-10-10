@@ -8,10 +8,16 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
   register(data): Observable<any> {
-    return this.http.post('http://localhost:8082/api/register', data);
+    return this.http.post(
+      'https://twitter-clone-apis.onrender.com/api/register',
+      data
+    );
   }
 
   login(data): Observable<any> {
-    return this.http.post('http://localhost:8082/api/login', data);
+    return this.http.post(
+      '  https://twitter-clone-apis.onrender.com/api/login',
+      data
+    );
   }
 }
