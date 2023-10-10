@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+
 import { NotificationService } from '../Services/notification.service';
-import { ModalService } from '../Services/modal.service';
+
 import { UserService } from '../Services/user.service';
 import { ValidationService } from '../Services/validation.service';
+import jwt_decode from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,21 +21,30 @@ export class EditProfileComponent {
     private notificationService: NotificationService,
     private userService: UserService,
     private validationService: ValidationService,
+    private cookieService: CookieService,
     private dialogRef: MatDialogRef<EditProfileComponent>
   ) {
     this.initForm();
   }
 
   initForm() {
+    const user = jwt_decode(this.cookieService.get('authToken'));
+
     this.editForm = new FormGroup({
-      username: new FormControl('', [this.validationService.noSpacesValidator]),
-      DOB: new FormControl('', []),
-      bio: new FormControl('', []),
-      phone: new FormControl('', [Validators.pattern(/^\d{10}$/)]),
+      username: new FormControl(user['user']['username'], [
+        this.validationService.noSpacesValidator,
+      ]),
+
+      DOB: new FormControl(user['user']['DOB'], []),
+      bio: new FormControl(user['user']['bio'], []),
+      phone: new FormControl(user['user']['phone'], [
+        Validators.pattern(/^\d{10}$/),
+      ]),
     });
   }
 
   formatDate(date: Date): string {
+    console.log('check for which this is crashed');
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
@@ -42,18 +53,27 @@ export class EditProfileComponent {
 
   editProfile() {
     if (this.editForm.valid) {
-      const { DOB, ...formValueWithoutDOB } = this.editForm.value;
+      const { DOB, phone, username, ...formValueWithBio } = this.editForm.value;
 
-      const requestBody = { ...formValueWithoutDOB };
+      const requestBody = { ...formValueWithBio };
 
       if (DOB) {
-        const formattedDate = this.formatDate(DOB);
+        const date = new Date(DOB).toISOString().split('T')[0];
+
+        console.log(String(date));
+        const formattedDate = this.formatDate(new Date(date));
 
         requestBody.dob = formattedDate;
       }
+      if (phone) {
+        requestBody.dob = phone;
+      }
+      if (username) {
+        requestBody.dob = username;
+      }
 
       if (Object.values(requestBody).some((value) => !!value)) {
-        this.userService.EditUserProfile(this.editForm.value).subscribe(
+        this.userService.EditUserProfile(requestBody).subscribe(
           (res) => {
             console.log(res);
             this.notificationService.showSuccess(res.message);
