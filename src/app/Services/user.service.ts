@@ -3,12 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private urlService: UrlService
+  ) {}
 
   getFollowRecomendations(): Observable<any> {
     const headers = this.getHeaders(); // Use the getHeaders function
@@ -16,7 +21,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/recommendation`, // replace this with real api
       options
@@ -29,7 +34,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/followers`, // replace this with real api
       options
@@ -42,7 +47,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/followings`, // replace this with real api
       options
@@ -55,7 +60,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.post(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/follow/${userId}`, // replace this with real api
       null,
@@ -69,7 +74,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.delete(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/unfollow/${userId}`,
       options
@@ -82,7 +87,7 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.get(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/followings`, // replace this with real api
       options
@@ -95,23 +100,31 @@ export class UserService {
     const options = { headers: headers };
 
     return this.http.put(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
-        'userId'
-      )}`,
+      `${this.urlService.getUrl()}/user/${this.cookieService.get('userId')}`,
       data,
       options
     );
   }
 
-  searchUsers(query: string): Observable<any[]> {
+  getUserProfile(): Observable<any> {
     const headers = this.getHeaders(); // Use the getHeaders function
 
     const options = { headers: headers };
 
-    return this.http.get<any[]>(
-      `https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
-        'userId'
-      )}/search/${query}`, // replace this with real api
+    return this.http.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get('userId')}`,
+      options
+    );
+  }
+
+  searchUsers(query: string): Observable<any> {
+    const headers = this.getHeaders(); // Use the getHeaders function
+
+    const options = { headers: headers };
+
+    return this.http.get(
+      `${this.urlService.getUrl()}
+      /user/${this.cookieService.get('userId')}`, // replace this with real api
       options
     );
   }

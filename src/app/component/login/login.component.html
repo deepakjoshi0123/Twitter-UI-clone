@@ -1,16 +1,22 @@
 <div fxLayoutAlign="center center" fxFlexFill class="login-page">
-  <mat-card fxFlex="30">
+  <mat-card class="login-form" fxFlex="30">
     <mat-toolbar color="primary">Login Page</mat-toolbar>
     <form
       fxLayoutAlign="stretch"
       fxLayout="column"
-      class="login-form"
       [formGroup]="loginForm"
       (ngSubmit)="login()"
     >
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="email" formControlName="email" />
+        <input
+          style="border-radius: 10px"
+          matInput
+          placeholder="email"
+          formControlName="email"
+        />
+        <mat-icon matSuffix>email</mat-icon>
+        <!-- Add email icon here -->
         <mat-error *ngIf="loginForm.get('email').hasError('required')">
           Email is required
         </mat-error>
@@ -27,6 +33,8 @@
           type="password"
           formControlName="password"
         />
+        <mat-icon matSuffix>security</mat-icon>
+        <!-- Add key icon here -->
         <mat-error *ngIf="loginForm.get('password').hasError('required')">
           Password is required
         </mat-error>

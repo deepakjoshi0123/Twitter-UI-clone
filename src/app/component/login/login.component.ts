@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../Services/auth.service';
-import { NotificationService } from '../Services/notification.service';
+import { AuthService } from '../../Services/auth.service';
+import { NotificationService } from '../../Services/notification.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 

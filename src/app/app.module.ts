@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LandingPageComponent } from './component/landing-page/landing-page.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,18 +20,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HomePageComponent } from './home-page/home-page.component';
+import { HomePageComponent } from './component/home-page/home-page.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav'; // Import MatSidenavModule
 
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
 import {
   MatDialogModule,
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { UsersListComponent } from './component/users-list/users-list.component';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { HomeComponent } from './component/home/home.component';
+import { SearchComponent } from './component/search/search.component';
+import { TweetsComponent } from './component/tweets/tweets.component';
+import { TweetComponent } from './component/tweets/tweet/tweet.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +49,20 @@ import {
     RegisterComponent,
     HomePageComponent,
     EditProfileComponent,
+    UsersListComponent,
+    SidebarComponent,
+    HomeComponent,
+    SearchComponent,
+    TweetsComponent,
+    TweetComponent,
+    ProfileComponent,
   ],
   imports: [
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    MatTooltipModule,
     BrowserModule,
     MatTooltipModule,
     AppRoutingModule,
@@ -61,8 +81,6 @@ import {
     MatNativeDateModule,
     MatSnackBarModule,
     MatSidenavModule,
-
-    SidebarComponent,
     MatDialogModule,
   ],
   providers: [

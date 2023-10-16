@@ -10,16 +10,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
-  standalone: true,
+
   styleUrls: ['./users-list.component.css'],
-  imports: [
-    MatCardModule,
-    MatListModule,
-    MatIconModule,
-    CommonModule,
-    MatButtonModule,
-    MatTooltipModule,
-  ],
 })
 export class UsersListComponent {
   @Input() users: any[] = [];

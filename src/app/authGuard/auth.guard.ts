@@ -18,17 +18,22 @@ export class AuthGuard implements CanActivate {
         // Check if the token is expired
 
         if (decodedToken.exp * 1000 + 3600000 * 3 > Date.now()) {
+          console.log(
+            'check route - in auth guard --->',
+            route.routeConfig?.path
+          );
           // Token is valid, user is authenticated
 
           // Check if the user is trying to access the login or register page
-          // if (
-          //   route.routeConfig?.path === 'login' ||
-          //   route.routeConfig?.path === 'register'
-          // ) {
-          //   // If so, redirect to the home page
-          //   this.router.navigate(['/home']);
-          //   return false;
-          // }
+          if (
+            route.routeConfig?.path === 'login' ||
+            route.routeConfig?.path === 'register' ||
+            route.routeConfig?.path === ''
+          ) {
+            // If so, redirect to the home page
+            this.router.navigate(['/home']);
+            return false;
+          }
 
           // For other routes, allow access
           return true;
@@ -44,8 +49,8 @@ export class AuthGuard implements CanActivate {
       }
     } else {
       // Token is not present, redirect to login page
-      this.router.navigate(['/login']);
-      return false;
+      // this.router.navigate(['/login']);
+      return true;
     }
   }
 }

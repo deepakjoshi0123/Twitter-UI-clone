@@ -1,13 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
+
 import { Tweet } from './tweet.model';
 @Component({
   selector: 'app-tweet',
   templateUrl: './tweet.component.html',
   styleUrls: ['./tweet.component.css'],
-  standalone: true,
-  imports: [MatCardModule, MatIconModule],
 })
 export class TweetComponent {
   @Input() tweet: Tweet;

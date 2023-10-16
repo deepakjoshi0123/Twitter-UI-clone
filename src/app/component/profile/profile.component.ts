@@ -6,25 +6,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
 import { Router } from '@angular/router';
-import { TweetService } from '../Services/tweet.service';
+import { TweetService } from '../../Services/tweet.service';
 
-import { ModalService } from '../Services/modal.service';
+import { ModalService } from '../../Services/modal.service';
 import { TweetsComponent } from '../tweets/tweets.component';
-import { UserService } from '../Services/user.service';
+import { UserService } from '../../Services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatIconModule,
-    TweetsComponent,
-  ],
+
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
@@ -39,8 +31,7 @@ export class ProfileComponent {
     private tweetService: TweetService,
     private modalService: ModalService,
     private userService: UserService,
-    private cookieService: CookieService,
-    private dialog: MatDialog
+    private cookieService: CookieService
   ) {
     this.username = this.cookieService.get('username');
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TweetService } from '../Services/tweet.service';
+import { TweetService } from '../../Services/tweet.service';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TweetsComponent } from '../tweets/tweets.component';
 import { Router } from '@angular/router';
 
-import { NotificationService } from '../Services/notification.service';
+import { NotificationService } from '../../Services/notification.service';
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CookieService } from 'ngx-cookie-service';
@@ -17,16 +17,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  standalone: true,
+
   styleUrls: ['./home.component.css'],
-  imports: [
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    TweetsComponent,
-    FormsModule,
-    MatToolbarModule,
-  ],
 })
 export class HomeComponent implements OnInit {
   newTweetText: string = '';
@@ -45,7 +37,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.tweetService.getTweets().subscribe(
       (res) => {
-        this.tweets = res.data;
+        this.tweets = res.data.timeline;
       },
       (error) => {
         //navigate to login page

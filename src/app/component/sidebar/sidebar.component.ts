@@ -7,25 +7,12 @@ import { ProfileComponent } from '../profile/profile.component';
 import { UsersListComponent } from '../users-list/users-list.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon'; // Im
-import { UserService } from '../Services/user.service';
-import { NotificationService } from '../Services/notification.service';
-
-import { SearchComponent } from '../search/search.component';
+import { UserService } from '../../Services/user.service';
+import { NotificationService } from '../../Services/notification.service';
 
 @Component({
   selector: 'app-sidebar',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    RouterModule,
-    HomeComponent,
-    ProfileComponent,
-    UsersListComponent,
-    MatListModule,
-    MatIconModule,
-    SearchComponent,
-  ],
+
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })

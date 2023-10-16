@@ -3,19 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TweetService {
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private urlService: UrlService
+  ) {}
 
   getTweets(): Observable<any> {
     const headers = this.getHeaders(); // Use the getHeaders function
     const options = { headers: headers };
 
     return this.http.get(
-      `  https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/timeline`,
       options
@@ -29,7 +34,7 @@ export class TweetService {
     let userId = this.cookieService.get('userId');
     console.log('why its null', userId);
     return this.http.get(
-      `  https://twitter-clone-apis.onrender.com/api/user/${userId}/tweets`,
+      `${this.urlService.getUrl()}/user/${userId}/tweets`,
       options
     );
   }
@@ -40,7 +45,7 @@ export class TweetService {
     const options = { headers: headers };
 
     return this.http.post(
-      `  https://twitter-clone-apis.onrender.com/api/user/${this.cookieService.get(
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/tweet`,
       tweet,

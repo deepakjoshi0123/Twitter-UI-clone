@@ -39,6 +39,8 @@
 
 .user-list {
   margin-top: 80px;
+  position: sticky;
+  top: 0;
 }
 .search-bar {
   position: absolute;

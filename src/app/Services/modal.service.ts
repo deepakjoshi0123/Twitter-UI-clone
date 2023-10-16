@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { UsersListComponent } from '../users-list/users-list.component';
-import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { UsersListComponent } from '../component/users-list/users-list.component';
+import { EditProfileComponent } from '../component/edit-profile/edit-profile.component';
 import { UserService } from './user.service';
 import { NotificationService } from './notification.service';
 

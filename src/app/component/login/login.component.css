@@ -1,0 +1,44 @@
+/* Default styles for larger screens */
+.login-form {
+  padding: 3vh;
+  background-color: rgb(174, 211, 228);
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 50vh;
+  background-image: url("../../assets/background.jpg"); /* Adjust the path */
+  background-size: cover;
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  height: 8vh;
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 640px) {
+  .login-page {
+    width: 80%; /* Adjust the width for smaller screens */
+  }
+
+  .login-form {
+    max-width: 50% !important;
+    padding: 2vh; /* Adjust padding for smaller screens */
+  }
+
+  .login-button {
+    height: 6vh; /* Adjust button height for smaller screens */
+  }
+
+  /* Add more responsive styles as needed */
+}
