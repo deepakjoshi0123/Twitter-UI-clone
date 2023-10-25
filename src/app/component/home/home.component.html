@@ -14,6 +14,9 @@
             (input)="updateTweetButtonDisabledState()"
           ></textarea>
         </mat-form-field>
+        <div class="error-message" *ngIf="tweetLengthError">
+          {{ tweetLengthError }}
+        </div>
         <button
           mat-raised-button
           class="tweet-button"
@@ -26,4 +29,7 @@
     </mat-card>
     <app-tweets [tweets]="tweets"></app-tweets>
   </div>
+  <a class="show-more" *ngIf="isShowMoreVisable()" (click)="showMore()"
+    >Show more</a
+  >
 </div>

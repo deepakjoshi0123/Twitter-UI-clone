@@ -26,7 +26,7 @@ export class TweetComponent {
   }
 
   getDateTime(tweet) {
-    const tweetDate = new Date('2023-09-26T10:30:00Z'); // Replace this with the actual tweet date
+    const tweetDate = new Date(tweet.date);
     const formattedDate = this.getTweetDate(tweetDate);
     return formattedDate;
   }

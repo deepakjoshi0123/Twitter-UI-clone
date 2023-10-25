@@ -1,11 +1,12 @@
 <div fxLayoutAlign="center center" fxFlexFill class="login-page">
-  <mat-card class="login-form" fxFlex="30">
+  <mat-card fxFlex="30">
     <mat-toolbar color="primary">Login Page</mat-toolbar>
     <form
       fxLayoutAlign="stretch"
       fxLayout="column"
       [formGroup]="loginForm"
       (ngSubmit)="login()"
+      class="login-form"
     >
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
@@ -39,9 +40,7 @@
           Password is required
         </mat-error>
       </mat-form-field>
-      <button mat-raised-button class="login-button" type="submit">
-        Login
-      </button>
+      <button class="login-button" type="submit">Login</button>
     </form>
 
     <!-- Style the message and button using Material UI classes -->

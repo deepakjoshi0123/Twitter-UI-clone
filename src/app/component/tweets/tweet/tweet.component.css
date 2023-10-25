@@ -3,7 +3,7 @@
   margin-top: 5px;
   cursor: pointer;
   padding: 8px;
-  background-color: #e3eaef;
+  background-color: rgb(227, 229, 236);
   box-shadow: 0 2px 4px rgba(138, 136, 136, 0.1); /* Add a subtle shadow */
   transition: background-color 0.2s ease; /* Smooth hover effect */
 }
@@ -22,14 +22,15 @@
 
 .profile-icon {
   font-size: 50px; /* Increase the icon size */
-  margin-right: 12px; /* Add some spacing between the icon and text */
-  height: 50px;
-  width: 50px;
+  margin-right: 2vh; /* Add some spacing between the icon and text */
+  height: 10vh;
+  width: 9vh;
   color: #657786;
+  flex-shrink: 0; /* Prevent the profile picture from shrinking */
 }
 
 .tweet-details {
-  margin-right: 10px;
+  margin-right: 5vh;
 }
 
 .username,
@@ -48,6 +49,6 @@
 }
 
 .tweet-content {
-  font-size: 14px;
+  font-size: 13px;
   font-family: Georgia, "Times New Roman", Times, serif;
 }

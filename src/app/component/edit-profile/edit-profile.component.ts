@@ -6,8 +6,8 @@ import { NotificationService } from '../../Services/notification.service';
 
 import { UserService } from '../../Services/user.service';
 import { ValidationService } from '../../Services/validation.service';
-import jwt_decode from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -21,10 +21,10 @@ export class EditProfileComponent {
 
   constructor(
     private notificationService: NotificationService,
-
     private userService: UserService,
     private validationService: ValidationService,
     private cookieService: CookieService,
+    private router: Router,
     private dialogRef: MatDialogRef<EditProfileComponent>
   ) {}
 
@@ -32,12 +32,11 @@ export class EditProfileComponent {
     this.userDetails = this.userService.getUserProfile().subscribe(
       (res) => {
         this.userDetails = res.data;
-        console.log(this.userDetails);
         this.isFormInitialized = true;
         this.initForm();
       },
       (error) => {
-        console.log(error);
+        this.router.navigate(['/login']);
       }
     );
   }
@@ -57,7 +56,6 @@ export class EditProfileComponent {
   }
 
   formatDate(date: Date): string {
-    console.log('check for which this is crashed');
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
@@ -70,12 +68,11 @@ export class EditProfileComponent {
 
       this.userService.EditUserProfile(this.editForm.value).subscribe(
         (res) => {
-          console.log(res);
+          this.cookieService.set('username', username);
           this.notificationService.showSuccess(res.message);
           this.dialogRef.close({ username: this.editForm.value.username });
         },
         (error) => {
-          console.log(error);
           let errMsg = error.error.errors
             ? error.error.errors[0].msg
             : error.error.message;
@@ -86,10 +83,8 @@ export class EditProfileComponent {
       // });
     } else {
       // No data in the requestBody, close the dialogue
-      console.log('No data to edit, closing the dialogue');
+
       this.dialogRef.close();
-      // Assuming you have a method to close the dialogue in your NotificationService
-      // this.notificationService.closeDialogue();
     }
   }
 }

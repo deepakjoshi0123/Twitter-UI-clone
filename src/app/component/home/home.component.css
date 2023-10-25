@@ -92,6 +92,25 @@ button.tweet-button:disabled {
   scrollbar-width: none;
 }
 
+.show-more {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vh;
+  cursor: pointer;
+  color: #0e7ee0;
+  transition: color 0.2s ease; /* Add a smooth transition for the color change */
+}
+
+.show-more:hover {
+  color: #0056b3; /* Change the color when the element is hovered over */
+}
+
+.error-message {
+  color: red;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
 ::-webkit-scrollbar {
   width: 0; /* Hide the scrollbar in Chrome and Safari */
 }

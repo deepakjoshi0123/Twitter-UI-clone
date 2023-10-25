@@ -33,17 +33,14 @@ export class ModalService {
     // Subscribe to the userSelected event emitted by UsersListComponent
     dialogRef.componentInstance.userSelected.subscribe(
       (selectedUser: string) => {
-        console.log('Selected user: in follower', selectedUser);
         if (selectedUser['isFollow']) {
           this.userService.follow(selectedUser['id']).subscribe((res) => {
-            console.log('Follow API response:', res);
             this.notificationService.showSuccess(res.message);
           });
           // If user is following, call a function for unfollow
         } else {
           // If user is not following, call a function for follow
           this.userService.unfollow(selectedUser['id']).subscribe((res) => {
-            console.log('Unfollow API response:', res);
             this.notificationService.showSuccess(res.message);
           });
         }
@@ -62,18 +59,15 @@ export class ModalService {
     // Subscribe to the userSelected event emitted by UsersListComponent
     dialogRef.componentInstance.userSelected.subscribe(
       (selectedUser: string) => {
-        console.log('Selected user: in following', selectedUser);
         // since we only intially user would be following these users
         if (!selectedUser['following']) {
           this.userService.follow(selectedUser['id']).subscribe((res) => {
-            console.log('Follow API response:', res);
             this.notificationService.showSuccess(res.message);
           });
           // If user is following, call a function for unfollow
         } else {
           // If user is not following, call a function for follow
           this.userService.unfollow(selectedUser['id']).subscribe((res) => {
-            console.log('Unfollow API response:', res);
             this.notificationService.showSuccess(res.message);
           });
         }

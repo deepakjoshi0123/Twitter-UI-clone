@@ -24,6 +24,11 @@ export class ProfileComponent {
   tweets: any[] = [];
   followers: any[] = [];
   followings: any[] = [];
+
+  limit: number = 2;
+  offset: number = 0;
+  totalCount: number = 0;
+
   username: string = '';
 
   constructor(
@@ -37,13 +42,12 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
-    this.tweetService.getProfileTweets().subscribe(
+    this.tweetService.getProfileTweets(this.limit, this.offset).subscribe(
       (res) => {
-        this.tweets = res.data;
+        this.tweets = res.data.tweets;
+        this.totalCount = res.data.totalCount;
       },
       (error) => {
-        //navigate to login page
-        console.log('error check ...->', error);
         this.router.navigate(['/login']);
       }
     );
@@ -59,7 +63,6 @@ export class ProfileComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result.username) {
-        console.log('Updated Username:', result.username);
         this.username = result.username;
       }
     });
@@ -67,14 +70,14 @@ export class ProfileComponent {
 
   openFollowersModal() {
     this.userService.getFollowers().subscribe((res) => {
-      this.followers = res.data;
+      this.followers = res.data.followers;
       this.modalService.openFollowersModal(this.followers);
     });
   }
 
   openFollowingsModal() {
     this.userService.getFollowings().subscribe((res) => {
-      this.followings = res.data;
+      this.followings = res.data.followings;
       this.modalService.openFollowingsModal(this.followings);
     });
   }
@@ -114,5 +117,22 @@ export class ProfileComponent {
       return this.formatJoinedDate(dateString);
     }
     return null;
+  }
+  showMore() {
+    this.offset = this.offset + 2;
+
+    this.tweetService.getProfileTweets(this.limit, this.offset).subscribe(
+      (res) => {
+        this.tweets = this.tweets.concat(res.data.tweets);
+      },
+      (error) => {
+        //navigate to login page
+        this.router.navigate(['/login']);
+      }
+    );
+  }
+
+  isShowMoreVisable() {
+    return this.tweets.length < this.totalCount;
   }
 }

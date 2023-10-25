@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { HttpHeaders } from '@angular/common/http';
+
 import { UrlService } from './url.service';
 
 @Injectable({
@@ -15,49 +15,28 @@ export class TweetService {
     private urlService: UrlService
   ) {}
 
-  getTweets(): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-    const options = { headers: headers };
-
+  getTweets(limit: number, offset: number): Observable<any> {
     return this.http.get(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
-      )}/timeline`,
-      options
+      )}/timeline?limit=${limit}&offset=${offset}`
     );
   }
 
-  getProfileTweets(): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-    const options = { headers: headers };
-
-    let userId = this.cookieService.get('userId');
-    console.log('why its null', userId);
+  getProfileTweets(limit: number, offset: number): Observable<any> {
     return this.http.get(
-      `${this.urlService.getUrl()}/user/${userId}/tweets`,
-      options
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
+        'userId'
+      )}/tweets?limit=${limit}&offset=${offset}`
     );
   }
 
   addTweet(tweet: any) {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.post(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/tweet`,
-      tweet,
-      options
+      tweet
     );
-  }
-
-  private getHeaders(): HttpHeaders {
-    const authToken = this.cookieService.get('authToken');
-
-    return new HttpHeaders({
-      Authorization: authToken,
-    });
   }
 }

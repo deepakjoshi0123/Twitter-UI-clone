@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -40,6 +40,8 @@ import { SearchComponent } from './component/search/search.component';
 import { TweetsComponent } from './component/tweets/tweets.component';
 import { TweetComponent } from './component/tweets/tweet/tweet.component';
 import { ProfileComponent } from './component/profile/profile.component';
+
+import { TokenInterceptor } from './interceptor/interceptor';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,7 @@ import { ProfileComponent } from './component/profile/profile.component';
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

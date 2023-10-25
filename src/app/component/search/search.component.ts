@@ -54,7 +54,6 @@ export class SearchComponent {
     }
 
     user.following = !user.following;
-    console.log('user', user);
     // no need to emit here as this not child component so directly call api from here to follow user
     this.userSelected.emit(user);
   }

@@ -24,9 +24,13 @@ export class RegisterComponent {
 
   initForm() {
     this.registerForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(30),
+      ]),
       username: new FormControl('', [
         Validators.required,
+        Validators.maxLength(30),
         this.validationService.noSpacesValidator,
       ]),
       DOB: new FormControl('', []),
@@ -37,10 +41,12 @@ export class RegisterComponent {
       email: new FormControl('', [
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/),
+        Validators.maxLength(30),
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(6), // Minimum password length is 6 characters
+        Validators.minLength(6),
+        Validators.maxLength(30),
       ]),
     });
   }

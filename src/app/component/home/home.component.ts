@@ -1,18 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TweetService } from '../../Services/tweet.service';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { TweetsComponent } from '../tweets/tweets.component';
 import { Router } from '@angular/router';
 
 import { NotificationService } from '../../Services/notification.service';
-import { FormsModule } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { CookieService } from 'ngx-cookie-service';
-
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +16,12 @@ export class HomeComponent implements OnInit {
   newTweetText: string = '';
   tweets: any[] = [];
 
+  limit: number = 4;
+  offset: number = 0;
+  totalCount: number = 0;
+
+  tweetLengthError: string = '';
   isTweetButtonDisabled: boolean = true;
-  private subscription: Subscription;
 
   constructor(
     private tweetService: TweetService,
@@ -35,13 +31,13 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tweetService.getTweets().subscribe(
+    this.tweetService.getTweets(this.limit, this.offset).subscribe(
       (res) => {
-        this.tweets = res.data.timeline;
+        this.tweets = res.data.tweets;
+        this.totalCount = res.data.totalCount;
       },
       (error) => {
         //navigate to login page
-
         this.router.navigate(['/login']);
       }
     );
@@ -60,12 +56,36 @@ export class HomeComponent implements OnInit {
   }
 
   updateTweetButtonDisabledState() {
-    // Disable the button if the tweetText length is less than or equal to 1
     this.isTweetButtonDisabled = this.newTweetText.trim().length < 1;
+
+    if (this.newTweetText.trim().length > 100) {
+      this.tweetLengthError = 'Tweet must be 100 characters or less.';
+      this.isTweetButtonDisabled = true;
+    } else {
+      this.tweetLengthError = ''; // Clear the error message if tweet length is within the limit
+    }
   }
 
   getName() {
     return this.cookieService.get('name');
+  }
+
+  showMore() {
+    this.offset = this.offset + 4;
+
+    this.tweetService.getTweets(this.limit, this.offset).subscribe(
+      (res) => {
+        this.tweets = this.tweets.concat(res.data.tweets);
+      },
+      (error) => {
+        //navigate to login page
+        this.router.navigate(['/login']);
+      }
+    );
+  }
+
+  isShowMoreVisable() {
+    return this.tweets.length < this.totalCount;
   }
 
   refreshCom() {

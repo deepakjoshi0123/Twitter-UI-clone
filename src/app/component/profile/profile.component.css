@@ -1,5 +1,5 @@
 .background-image {
-  background-color: rgb(203, 205, 211);
+  background-color: rgb(227, 229, 236);
   background-size: cover;
   background-position: center;
   height: 150px; /* Adjust the height as needed */
@@ -77,6 +77,20 @@
   justify-content: start;
   align-items: start;
 }
+
+.show-more {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vh;
+  cursor: pointer;
+  color: #0e7ee0;
+  transition: color 0.2s ease; /* Add a smooth transition for the color change */
+}
+
+.show-more:hover {
+  color: #0056b3; /* Change the color when the element is hovered over */
+}
+
 ::-webkit-scrollbar {
   width: 0; /* Hide the scrollbar in Chrome and Safari */
 }

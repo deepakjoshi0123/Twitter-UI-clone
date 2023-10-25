@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { HttpHeaders } from '@angular/common/http';
 import { UrlService } from './url.service';
 
 @Injectable({
@@ -16,124 +15,72 @@ export class UserService {
   ) {}
 
   getFollowRecomendations(): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.get(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
-      )}/recommendation`, // replace this with real api
-      options
+      )}/recommendation` // replace this with real api
     );
   }
 
   getFollowers(): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.get(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
-      )}/followers`, // replace this with real api
-      options
+      )}/followers` // replace this with real api
     );
   }
 
   getFollowings(): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.get(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
-      )}/followings`, // replace this with real api
-      options
+      )}/followings` // replace this with real api
     );
   }
 
-  follow(userId): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
+  follow(userId: number): Observable<any> {
     return this.http.post(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
       )}/follow/${userId}`, // replace this with real api
-      null,
-      options
+      null
     );
   }
 
-  unfollow(userId: any): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
+  unfollow(userId: number): Observable<any> {
     return this.http.delete(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
-      )}/unfollow/${userId}`,
-      options
+      )}/unfollow/${userId}`
     );
   }
 
   removeFollower(): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.get(
       `${this.urlService.getUrl()}/user/${this.cookieService.get(
         'userId'
-      )}/followings`, // replace this with real api
-      options
+      )}/followings` // replace this with real api
     );
   }
 
   EditUserProfile(data: any): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.put(
       `${this.urlService.getUrl()}/user/${this.cookieService.get('userId')}`,
-      data,
-      options
+      data
     );
   }
 
   getUserProfile(): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.get(
-      `${this.urlService.getUrl()}/user/${this.cookieService.get('userId')}`,
-      options
+      `${this.urlService.getUrl()}/user/${this.cookieService.get('userId')}`
     );
   }
 
   searchUsers(query: string): Observable<any> {
-    const headers = this.getHeaders(); // Use the getHeaders function
-
-    const options = { headers: headers };
-
     return this.http.get(
-      `${this.urlService.getUrl()}
-      /user/${this.cookieService.get('userId')}`, // replace this with real api
-      options
+      `${this.urlService.getUrl()}/user/${this.cookieService.get(
+        'userId'
+      )}/search/${query}`
     );
-  }
-
-  private getHeaders(): HttpHeaders {
-    const authToken = this.cookieService.get('authToken');
-
-    return new HttpHeaders({
-      Authorization: authToken,
-    });
   }
 }

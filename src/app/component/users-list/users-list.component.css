@@ -5,7 +5,7 @@
   top: 0; /* Stick to the top of the viewport */
 }
 .user-card-continer {
-  background-color: #ebeff3;
+  background-color: rgb(227, 229, 236);
 }
 .user-list {
   overflow-y: scroll;

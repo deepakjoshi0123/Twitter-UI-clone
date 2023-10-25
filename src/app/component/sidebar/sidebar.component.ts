@@ -52,7 +52,6 @@ export class SidebarComponent {
 
     if (user.following) {
       this.userService.follow(user.id).subscribe((res) => {
-        console.log('Follow API response:', res);
         this.homeComponent.refreshCom();
         this.notificationService.showSuccess(res.message);
       });
@@ -60,7 +59,6 @@ export class SidebarComponent {
     } else {
       // If user is not following, call a function for follow
       this.userService.unfollow(user.id).subscribe((res) => {
-        console.log('Unfollow API response:', res);
         this.homeComponent.refreshCom();
         this.notificationService.showSuccess(res.message);
       });
