@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { UserService } from '../../Services/user.service';
 import { NotificationService } from '../../Services/notification.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,7 +19,8 @@ export class SidebarComponent {
   constructor(
     private userService: UserService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   users: any[] = [];
@@ -60,9 +62,8 @@ export class SidebarComponent {
   }
 
   logout() {
-    document.cookie =
-      'authToken' + '=;expires=Thu, 01 Jan 2023 00:00:00 GMT;path=/;';
-
+    this.cookieService.delete('authToken');
+    this.cookieService.delete('expiry');
     this.router.navigate(['/login']);
   }
 }

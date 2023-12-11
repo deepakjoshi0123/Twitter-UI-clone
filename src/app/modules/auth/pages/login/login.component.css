@@ -8,8 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 50vh;
+  height: 100%;
+  width: 100%;
   background-image: url("../../../../../assets/background.jpg"); /* Adjust the path */
   background-size: cover;
 }
