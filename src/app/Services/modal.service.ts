@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogConfig,
+} from '@angular/material/dialog';
 import { UsersListComponent } from '../component/users-list/users-list.component';
 import { EditProfileComponent } from '../component/edit-profile/edit-profile.component';
 import { UserService } from './user.service';
@@ -16,10 +20,13 @@ export class ModalService {
   ) {}
 
   openEditProfileModal(): MatDialogRef<EditProfileComponent> {
-    return this.dialog.open(EditProfileComponent, {
-      width: '30%',
-      height: '78%',
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '30%';
+    dialogConfig.maxWidth = '100vw'; // Set maximum width to 100% of viewport width
+    dialogConfig.height = '78%';
+    dialogConfig.maxHeight = '100vh'; // Set maximum height to 100% of viewport height
+
+    return this.dialog.open(EditProfileComponent, dialogConfig);
   }
 
   openFollowersModal(users: any[]) {

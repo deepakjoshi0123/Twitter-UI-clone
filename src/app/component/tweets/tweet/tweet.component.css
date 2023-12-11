@@ -14,14 +14,14 @@
 
 /* Style the tweet header */
 .tweet-header {
-  margin-top: 1px;
+  margin-top: 0.1rem;
   display: flex;
   align-items: center;
   padding: 4px 8px;
 }
 
 .profile-icon {
-  font-size: 50px; /* Increase the icon size */
+  font-size: 4em; /* Increase the icon size */
   margin-right: 2vh; /* Add some spacing between the icon and text */
   height: 10vh;
   width: 9vh;
@@ -35,8 +35,8 @@
 
 .username,
 .datetime {
-  margin-left: 50px;
-  font-size: 14px;
+  margin-left: 0.9rem;
+  font-size: 0.9rem;
   color: #657786;
   font-family: "Courier New", Courier, monospace;
 }
@@ -44,11 +44,11 @@
 .name {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 1rem;
   color: #14171a;
 }
 
 .tweet-content {
-  font-size: 13px;
+  font-size: 0.95rem;
   font-family: Georgia, "Times New Roman", Times, serif;
 }

@@ -71,7 +71,7 @@ export class UserService {
   }
 
   getUserProfile(): Observable<any> {
-    return this.http.get(
+    return this.http.get<any>(
       `${this.urlService.getUrl()}/user/${this.cookieService.get('userId')}`
     );
   }

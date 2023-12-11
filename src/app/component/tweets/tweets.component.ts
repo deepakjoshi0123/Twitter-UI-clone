@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TweetsComponent {
   @Input() tweets: any[] = [];
+
   ngOnInit() {
     // Log the tweet.text values to the console
     this.tweets.forEach((tweet) => {});

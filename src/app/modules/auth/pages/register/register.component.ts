@@ -1,17 +1,42 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../Services/notification.service';
-import { ValidationService } from '../../Services/validation.service';
+import { NotificationService } from '../../../../Services/notification.service';
+import { ValidationService } from '../../../../Services/validation.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SpinnerComponent,
+    MatListModule,
+    MatIconModule,
+    NgIf,
+  ],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  loading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -26,14 +51,16 @@ export class RegisterComponent {
     this.registerForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
-        Validators.maxLength(30),
+        Validators.pattern(/^[a-zA-Z ]+$/),
+        Validators.minLength(7),
+        Validators.maxLength(20),
       ]),
       username: new FormControl('', [
         Validators.required,
-        Validators.maxLength(30),
+        Validators.maxLength(15),
+        Validators.pattern(/^[a-zA-Z0-9_]+$/),
         this.validationService.noSpacesValidator,
       ]),
-      DOB: new FormControl('', []),
       phone: new FormControl('', [
         Validators.required,
         Validators.pattern(/^\d{10}$/),
@@ -51,24 +78,10 @@ export class RegisterComponent {
     });
   }
 
-  formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
-
   register() {
     if (this.registerForm.valid) {
-      const { DOB, ...formValueWithoutDOB } = this.registerForm.value;
-
-      const requestBody = { ...formValueWithoutDOB };
-
-      if (DOB) {
-        const formattedDate = this.formatDate(DOB);
-
-        requestBody.dob = formattedDate;
-      }
+      this.loading = true;
+      const requestBody = this.registerForm.value;
 
       this.authService.register(requestBody).subscribe(
         (res) => {
@@ -76,12 +89,11 @@ export class RegisterComponent {
             this.notificationService.showSuccess('Registration successful!');
             this.router.navigate(['/login']);
           }
+          this.loading = false;
         },
         (error) => {
-          console.error('An error occurred:', error.errors[0].msg);
-          this.notificationService.showError(
-            'Registration failed. Please try again.'
-          );
+          this.notificationService.showError(error.error.errors.errors[0].msg);
+          this.loading = false;
         }
       );
     }

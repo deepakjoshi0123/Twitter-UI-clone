@@ -29,6 +29,9 @@
     </mat-card>
     <app-tweets [tweets]="tweets"></app-tweets>
   </div>
+
+  <app-spinner [show]="loading"></app-spinner>
+
   <a class="show-more" *ngIf="isShowMoreVisable()" (click)="showMore()"
     >Show more</a
   >

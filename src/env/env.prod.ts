@@ -1,5 +1,5 @@
+//just pass env file in flag variable to use dev or production url
 export const environment = {
-  production: true,
-  liveUrl: 'https://twitter-clone-apis.onrender.com/api',
-  localUrl: 'http://localhost:8082/api',
+  apiUrl: 'https://twitter-clone-apis.onrender.com/api',
+  appUrl: 'http://localhost:8082/api',
 };

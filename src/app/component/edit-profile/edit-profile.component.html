@@ -1,7 +1,7 @@
 <div class="edit-page" fxLayoutAlign="center center" fxFlexFill>
-  <mat-card fxFlex="100">
-    <mat-toolbar>Edit Profile</mat-toolbar>
+  <mat-card fxFlex="100%">
     <div *ngIf="isFormInitialized">
+      <mat-toolbar>Edit Profile</mat-toolbar>
       <form
         fxLayoutAlign="stretch"
         fxLayout="column"
@@ -24,7 +24,13 @@
 
         <mat-form-field fxFlex="100%">
           <mat-label>DOB</mat-label>
-          <input matInput [matDatepicker]="dobPicker" formControlName="DOB" />
+          <input
+            [max]="todayDate"
+            [min]="startDate"
+            matInput
+            [matDatepicker]="dobPicker"
+            formControlName="DOB"
+          />
           <mat-datepicker-toggle
             matSuffix
             [for]="dobPicker"
@@ -53,5 +59,6 @@
         </button>
       </form>
     </div>
+    <app-spinner [show]="loading"></app-spinner>
   </mat-card>
 </div>

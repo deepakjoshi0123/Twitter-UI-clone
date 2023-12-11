@@ -19,6 +19,10 @@ export class EditProfileComponent {
   userDetails: any;
   isFormInitialized = false;
 
+  todayDate: Date = new Date();
+
+  startDate: Date = new Date(1950, 0, 1);
+  loading: boolean = false;
   constructor(
     private notificationService: NotificationService,
     private userService: UserService,
@@ -29,14 +33,17 @@ export class EditProfileComponent {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.userDetails = this.userService.getUserProfile().subscribe(
       (res) => {
         this.userDetails = res.data;
         this.isFormInitialized = true;
         this.initForm();
+        this.loading = false;
       },
       (error) => {
         this.router.navigate(['/login']);
+        this.loading = false;
       }
     );
   }
@@ -64,6 +71,7 @@ export class EditProfileComponent {
 
   editProfile() {
     if (this.editForm.valid) {
+      this.loading = true;
       const { DOB, phone, username, ...formValueWithBio } = this.editForm.value;
 
       this.userService.EditUserProfile(this.editForm.value).subscribe(
@@ -71,6 +79,7 @@ export class EditProfileComponent {
           this.cookieService.set('username', username);
           this.notificationService.showSuccess(res.message);
           this.dialogRef.close({ username: this.editForm.value.username });
+          this.loading = false;
         },
         (error) => {
           let errMsg = error.error.errors
@@ -78,6 +87,7 @@ export class EditProfileComponent {
             : error.error.message;
           this.dialogRef.close();
           this.notificationService.showError(errMsg);
+          this.loading = false;
         }
       );
       // });

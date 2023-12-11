@@ -1,12 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
-import { ProfileComponent } from '../profile/profile.component';
-import { UsersListComponent } from '../users-list/users-list.component';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon'; // Im
 import { UserService } from '../../Services/user.service';
 import { NotificationService } from '../../Services/notification.service';
 

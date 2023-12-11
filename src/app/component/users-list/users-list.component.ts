@@ -1,11 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, EventEmitter, Output, Inject } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-users-list',

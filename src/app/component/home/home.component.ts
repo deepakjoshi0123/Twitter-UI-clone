@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   tweetLengthError: string = '';
   isTweetButtonDisabled: boolean = true;
 
+  loading: boolean = false;
+
   constructor(
     private tweetService: TweetService,
     private router: Router,
@@ -31,25 +33,31 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.tweetService.getTweets(this.limit, this.offset).subscribe(
       (res) => {
         this.tweets = res.data.tweets;
         this.totalCount = res.data.totalCount;
+        this.loading = false;
       },
       (error) => {
         //navigate to login page
         this.router.navigate(['/login']);
+        this.loading = false;
       }
     );
   }
 
   addNewTweet() {
+    this.loading = true;
     this.tweetService.addTweet({ tweet: this.newTweetText }).subscribe(
       (res) => {
         this.notificationService.showSuccess(res['message']);
+        this.loading = false;
       },
       (error) => {
         this.router.navigate(['/login']);
+        this.loading = false;
       }
     );
     this.newTweetText = ''; // Clear the input field
@@ -72,14 +80,16 @@ export class HomeComponent implements OnInit {
 
   showMore() {
     this.offset = this.offset + 4;
-
+    this.loading = true;
     this.tweetService.getTweets(this.limit, this.offset).subscribe(
       (res) => {
         this.tweets = this.tweets.concat(res.data.tweets);
+        this.loading = false;
       },
       (error) => {
         //navigate to login page
         this.router.navigate(['/login']);
+        this.loading = false;
       }
     );
   }
@@ -89,6 +99,9 @@ export class HomeComponent implements OnInit {
   }
 
   refreshCom() {
+    this.limit = 4;
+    this.offset = 0;
+    this.totalCount = 0;
     this.ngOnInit();
   }
 }

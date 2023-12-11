@@ -1,5 +1,5 @@
 <div class="register-page" fxLayoutAlign="center center" fxFlexFill>
-  <mat-card fxFlex="30">
+  <mat-card fxFlex="32">
     <mat-toolbar color="primary">Register Page</mat-toolbar>
     <form
       fxLayoutAlign="stretch"
@@ -10,14 +10,20 @@
     >
       <div fxLayout="row" fxLayoutGap="10px" fxFlex="100%">
         <mat-form-field fxFlex="50%">
-          <mat-label>Name</mat-label>
+          <mat-label>Full Name</mat-label>
           <input matInput placeholder="name" formControlName="name" />
           <mat-icon matSuffix>account_circle</mat-icon>
           <mat-error *ngIf="registerForm.get('name').hasError('required')"
-            >Name is required</mat-error
+            >Required</mat-error
           >
           <mat-error *ngIf="registerForm.get('name').hasError('maxlength')"
-            >Name should not exceed 30 characters</mat-error
+            >Should not exceed 20 characters</mat-error
+          >
+          <mat-error *ngIf="registerForm.get('name').hasError('minlength')"
+            >Should be more than 7 chars</mat-error
+          >
+          <mat-error *ngIf="registerForm.get('name').hasError('pattern')"
+            >Invalid name</mat-error
           >
         </mat-form-field>
 
@@ -26,13 +32,16 @@
           <input matInput placeholder="username" formControlName="username" />
           <mat-icon matSuffix>person</mat-icon>
           <mat-error *ngIf="registerForm.get('username').hasError('required')"
-            >User Name is required</mat-error
+            >Required</mat-error
           >
           <mat-error *ngIf="registerForm.get('username').hasError('noSpaces')"
             >Invalid username</mat-error
           >
           <mat-error *ngIf="registerForm.get('username').hasError('maxlength')"
-            >Username should not exceed 30 characters</mat-error
+            >Should not exceed 15 characters</mat-error
+          >
+          <mat-error *ngIf="registerForm.get('username').hasError('pattern')"
+            >Specail chars not allowed</mat-error
           >
         </mat-form-field>
       </div>
@@ -42,13 +51,13 @@
         <input matInput placeholder="email" formControlName="email" />
         <mat-icon matSuffix>email</mat-icon>
         <mat-error *ngIf="registerForm.get('email').hasError('required')"
-          >Email is required</mat-error
+          >Required</mat-error
         >
         <mat-error *ngIf="registerForm.get('email').hasError('pattern')"
           >Enter a valid email address</mat-error
         >
         <mat-error *ngIf="registerForm.get('email').hasError('maxlength')"
-          >Email should not exceed 30 characters</mat-error
+          >Should not exceed 30 characters</mat-error
         >
       </mat-form-field>
 
@@ -57,11 +66,10 @@
         <input matInput placeholder="phone number" formControlName="phone" />
         <mat-icon matSuffix>phone</mat-icon>
         <mat-error *ngIf="registerForm.get('phone').hasError('required')"
-          >Phone number is required</mat-error
+          >Required</mat-error
         >
         <mat-error *ngIf="registerForm.get('phone').hasError('pattern')"
-          >Phone number should have 10 digits and contain only
-          numbers</mat-error
+          >Should have 10 digits and contain only numbers</mat-error
         >
       </mat-form-field>
 
@@ -75,25 +83,19 @@
         />
         <mat-icon matSuffix>security</mat-icon>
         <mat-error *ngIf="registerForm.get('password').hasError('required')"
-          >Password is required</mat-error
+          >Required</mat-error
         >
         <mat-error *ngIf="registerForm.get('password').hasError('minlength')"
-          >Password should be at least 6 characters long</mat-error
+          >Should be at least 6 characters long</mat-error
         >
         <mat-error *ngIf="registerForm.get('password').hasError('maxlength')"
-          >Password should not exceed 30 chars
+          >Should not exceed 30 chars
         </mat-error>
       </mat-form-field>
 
-      <button
-        class="register-button"
-        type="submit"
-        [disabled]="registerForm.invalid"
-      >
-        Register
-      </button>
+      <button class="register-button" type="submit">Register</button>
     </form>
-
+    <app-spinner [show]="loading"></app-spinner>
     <!-- Add a button to navigate to the login page -->
     <div class="login-link">
       <a routerLink="/login"> Already have an account? Login </a>

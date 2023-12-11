@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 
 import { Router } from '@angular/router';
 import { TweetService } from '../../Services/tweet.service';
 
 import { ModalService } from '../../Services/modal.service';
-import { TweetsComponent } from '../tweets/tweets.component';
+
 import { UserService } from '../../Services/user.service';
 import { CookieService } from 'ngx-cookie-service';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +25,8 @@ export class ProfileComponent {
 
   username: string = '';
 
+  loading: boolean = false;
+
   constructor(
     private router: Router,
     private tweetService: TweetService,
@@ -42,13 +38,16 @@ export class ProfileComponent {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.tweetService.getProfileTweets(this.limit, this.offset).subscribe(
       (res) => {
         this.tweets = res.data.tweets;
         this.totalCount = res.data.totalCount;
+        this.loading = false;
       },
       (error) => {
         this.router.navigate(['/login']);
+        this.loading = false;
       }
     );
   }
@@ -60,25 +59,30 @@ export class ProfileComponent {
 
   openEditProfileModal() {
     const dialogRef = this.modalService.openEditProfileModal();
-
+    this.loading = true;
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result.username) {
         this.username = result.username;
       }
+      this.loading = false;
     });
   }
 
   openFollowersModal() {
+    this.loading = true;
     this.userService.getFollowers().subscribe((res) => {
       this.followers = res.data.followers;
       this.modalService.openFollowersModal(this.followers);
+      this.loading = false;
     });
   }
 
   openFollowingsModal() {
+    this.loading = true;
     this.userService.getFollowings().subscribe((res) => {
       this.followings = res.data.followings;
       this.modalService.openFollowingsModal(this.followings);
+      this.loading = false;
     });
   }
   getUserName() {
@@ -119,15 +123,18 @@ export class ProfileComponent {
     return null;
   }
   showMore() {
+    this.loading = true;
     this.offset = this.offset + 2;
 
     this.tweetService.getProfileTweets(this.limit, this.offset).subscribe(
       (res) => {
         this.tweets = this.tweets.concat(res.data.tweets);
+        this.loading = false;
       },
       (error) => {
         //navigate to login page
         this.router.navigate(['/login']);
+        this.loading = false;
       }
     );
   }

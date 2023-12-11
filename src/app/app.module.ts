@@ -4,8 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
-import { LoginComponent } from './component/login/login.component';
-import { RegisterComponent } from './component/register/register.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -42,13 +40,13 @@ import { TweetComponent } from './component/tweets/tweet/tweet.component';
 import { ProfileComponent } from './component/profile/profile.component';
 
 import { TokenInterceptor } from './interceptor/interceptor';
+import { SpinnerComponent } from './modules/shared/components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    LoginComponent,
-    RegisterComponent,
+
     HomePageComponent,
     EditProfileComponent,
     UsersListComponent,

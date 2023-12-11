@@ -1,19 +1,41 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../Services/auth.service';
-import { NotificationService } from '../../Services/notification.service';
+import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../../../Services/notification.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
+import { NgIf } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import jwt_decode from 'jwt-decode';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SpinnerComponent,
+    MatListModule,
+    MatIconModule,
+    NgIf,
+  ],
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  loading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -36,6 +58,7 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
+      this.loading = true;
       this.authService.login(this.loginForm.value).subscribe(
         (res) => {
           if (res.status === 200) {
@@ -46,17 +69,20 @@ export class LoginComponent {
             this.cookieService.set('name', user['user']['name']);
             this.cookieService.set('username', user['user']['username']);
             this.cookieService.set('joined', user['user']['createdAt']);
+            this.cookieService.set('expiry', user['exp']);
 
             this.notificationService.showSuccess('Success');
-
+            this.loading = false;
             this.router.navigate(['/home']);
           }
         },
         (error) => {
+          console.log(error);
           let errMsg = error.error.errors
-            ? error.error.errors[0].msg
+            ? error.error.errors.errors[0].msg
             : error.error.message;
           this.notificationService.showError(errMsg);
+          this.loading = false;
         }
       );
     }

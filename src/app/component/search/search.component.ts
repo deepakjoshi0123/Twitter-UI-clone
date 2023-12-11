@@ -1,16 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../Services/user.service';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Component, Input, EventEmitter, Output, Inject } from '@angular/core';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { MatListModule } from '@angular/material/list';
 import { of } from 'rxjs';
 
 @Component({
@@ -23,6 +14,7 @@ export class SearchComponent {
   searchQuery: string = '';
   searchResults: any[] = [];
   searchControl = new FormControl();
+
   @Output() userSelected: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private userService: UserService) {
@@ -41,9 +33,7 @@ export class SearchComponent {
         (results) => {
           this.searchResults = results['data'];
         },
-        (error) => {
-          console.error('Error fetching search results:', error);
-        }
+        (error) => {}
       );
   }
 

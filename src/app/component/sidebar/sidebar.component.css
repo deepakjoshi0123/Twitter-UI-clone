@@ -45,5 +45,10 @@
 .search-bar {
   position: absolute;
   z-index: 1;
-  width: 370px;
+  width: 33.5%;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: row;
 }
